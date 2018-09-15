@@ -11,6 +11,7 @@ while(True):
 
     # Detect the faces in the frame.
     face_cascade = cv2.CascadeClassifier(r'./haarcascade_frontalface_default.xml')
+    eye_cascade = cv2.CascadeClassifier(r'./haarcascade_eye.xml')
     faces = face_cascade.detectMultiScale(
         gray,
         scaleFactor = 1.15,
@@ -18,17 +19,26 @@ while(True):
         minSize = (5, 5),
         flags = 2
         )
+    eyes = eye_cascade.detectMultiScale(
+        gray,
+        scaleFactor = 1.3,
+        minNeighbors = 5,
+        flags =2
+        )
 
     for (x, y, w, h) in faces:
         cv2.rectangle(frame, (x, y), (x+w, y+w), (0, 255, 0), 2)
-        
+
+    for (x, y, w, h) in eyes:
+        cv2.rectangle(frame, (x, y), (x+w, y+w), (255, 0, 0), 2)
+    
 
     # Display the resulting frame
     cv2.imshow('frame', frame)
 
-    time.sleep(0.1)
+    # time.sleep(0.1)
 
-    print(gray.shape)
+    # print(gray.shape)
     
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
