@@ -2,7 +2,7 @@ import numpy as np
 import cv2
 from matplotlib import pyplot as plt
 
-img = cv2.imread('lena.jpg', 0)
+img = cv2.imread('lena_color.jpg', 0)
 
 #cv2.namedWindow('image', cv2.WINDOW_NORMAL)
 cv2.imshow('image', img)
