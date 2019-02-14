@@ -38,11 +38,10 @@ class SchedRun():
         self.scheduler.run()
         return
 
-
 def init_show_windows():
-    #cv2.namedWindow("result", cv2.WINDOW_NORMAL)
-    #cv2.resizeWindow("result", 640, 400)
-    #cv2.moveWindow("result", 100, 100)
+    cv2.namedWindow("result", cv2.WINDOW_NORMAL)
+    cv2.resizeWindow("result", 640, 400)
+    cv2.moveWindow("result", 100, 100)
     print('Init show windows finished. ')
 
 def show_frame(input_queue, timeout = 3):
@@ -65,7 +64,7 @@ def main(input_file):
 
     sched_run = SchedRun(func = show_frame, args = {frame_queue}, 
                          init_func = init_show_windows, 
-                         interval = 0.03, 
+                         interval = 0.035, 
                          init_interval = 0.5)
 
     vid = cv2.VideoCapture(input_file)
