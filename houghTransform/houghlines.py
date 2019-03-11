@@ -5,8 +5,8 @@ img = cv2.imread('../data/sudoku.png')
 img_lines1 = img.copy()
 img_lines2 = img.copy()
 
-#gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-gray = img
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+#gray = img
 edges = cv2.Canny(gray, 50, 150, apertureSize = 3)
 
 lines = cv2.HoughLines(edges, 1, np.pi/180, 200)
