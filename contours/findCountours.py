@@ -492,7 +492,8 @@ def phaseVideo6(input_path, output_path = None, display = False):
     frame_index = 0
     display = None
 
-    cv2.namedWindow('Result', flags = cv2.WINDOW_NORMAL)
+    if display:
+        cv2.namedWindow('Result', flags = cv2.WINDOW_NORMAL)
 
     #pre_frame = cv2.imread('mysample.jpg')
     #pre_frame = cv2.cvtColor(pre_frame, cv2.COLOR_RGB2GRAY)
