@@ -535,7 +535,7 @@ def phaseVideo6(input_path, output_path = None, display = False):
         thresh = cv2.threshold(image_delta, 50, 255, cv2.THRESH_BINARY)[1]
         #thresh = cv2.adaptiveThreshold(image_delta, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 11, 2)
         thresh = cv2.dilate(thresh, None, iterations = 2)
-        contours, hierarchy = cv2.findContours(thresh.copy(), 
+        _, contours, hierarchy = cv2.findContours(thresh.copy(), 
                                            cv2.RETR_EXTERNAL, 
                                            cv2.CHAIN_APPROX_SIMPLE)
 
