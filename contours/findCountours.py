@@ -608,7 +608,7 @@ def main():
         # detect_video(FLAGS.input,  
         phaseVideo6(input_path = FLAGS.input,  
                     output_path = FLAGS.output, 
-                    show_windows = FLAGS.display)
+                    show_windows = FLAGS.show)
 
     else:
         print("See usage with --help.")
