@@ -471,7 +471,7 @@ def phaseVideo5(input_path, output_path = None):
 
 
 # 大量照片累计干扰消除法。
-def phaseVideo6(input_path, output_path = None):
+def phaseVideo6(input_path, output_path = None, display = False):
 
     acum_frame = None
     ACUM_NUMBER = 100
@@ -563,14 +563,15 @@ def phaseVideo6(input_path, output_path = None):
         if output_path != None:
             out.write(display)
 
-        cv2.imshow('Result', display)
-        key = cv2.waitKey(1)
-        if key & 0xFF == ord('q'):
-            return
-        elif key & 0xFF == ord('s'):
-            #sample_file = input_path.split('.')[0] + '_sample.jpg'
-            sample_file = 'sample.bmp'
-            cv2.imwrite(sample_file, frame)
+        if display:
+            cv2.imshow('Result', display)
+            key = cv2.waitKey(1)
+            if key & 0xFF == ord('q'):
+                return
+            elif key & 0xFF == ord('s'):
+                #sample_file = input_path.split('.')[0] + '_sample.jpg'
+                sample_file = 'sample.bmp'
+                cv2.imwrite(sample_file, frame)
 
 
 def main():
@@ -581,6 +582,10 @@ def main():
     global colors
 
     parser = argparse.ArgumentParser()
+
+    # 是否将处理后结果显示。
+    parser.add_argument('-d', '--display', default = False, action = "store_true",
+                        help = '[Optional] If shows result to local view. ')   
 
     parser.add_argument('-i', '--input', type = str, default = 'test.mp4', 
                         help = 'Input video. DEFAULT: test.mp4 ')
@@ -595,7 +600,8 @@ def main():
         
         # detect_video(FLAGS.input,  
         phaseVideo6(input_path = FLAGS.input,  
-                    output_path = FLAGS.output)
+                    output_path = FLAGS.output, 
+                    display = FLAGS.display)
 
     else:
         print("See usage with --help.")
