@@ -482,7 +482,7 @@ def phaseVideo6(input_path, output_path = None):
         return
 
     if output_path != None:
-        video_size = (1920, 1080)
+        video_size = (1920, 756)
         video_fps = camera.get(cv2.CAP_PROP_FPS)
         video_FourCC = cv2.VideoWriter_fourcc(*'x264')
         #video_FourCC = int(camera.get(cv2.CAP_PROP_FOURCC))
@@ -503,6 +503,9 @@ def phaseVideo6(input_path, output_path = None):
             break
 
         frame_index += 1
+        (h, w) = frame.shape[:2]
+        #frame = frame[0:h, w//5:w*4//5]
+        frame = frame[h//5:h*9//10, 0:w]
         (h, w) = frame.shape[:2]
         frame = cv2.resize(frame, (w//2, h//2), interpolation = cv2.INTER_LINEAR)
         image_gray = cv2.cvtColor(frame, cv2.COLOR_RGB2GRAY)
@@ -538,7 +541,7 @@ def phaseVideo6(input_path, output_path = None):
         contours_valid = []
         for item in contours:
             area = cv2.contourArea(item)
-            if area > 100 and area < 50000:
+            if area > 300 and area < 50000:
                 contours_valid.append(item)
                 #print(area)
 
@@ -592,7 +595,7 @@ def main():
         
         # detect_video(FLAGS.input,  
         phaseVideo6(input_path = FLAGS.input,  
-                   output_path = FLAGS.output)
+                    output_path = FLAGS.output)
 
     else:
         print("See usage with --help.")
