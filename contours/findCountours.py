@@ -471,7 +471,7 @@ def phaseVideo5(input_path, output_path = None):
 
 
 # 大量照片累计干扰消除法。
-def phaseVideo6(input_path, output_path = None, display = False):
+def phaseVideo6(input_path, output_path = None, show_windows = False):
 
     acum_frame = None
     ACUM_NUMBER = 100
@@ -492,7 +492,7 @@ def phaseVideo6(input_path, output_path = None, display = False):
     frame_index = 0
     display = None
 
-    if display:
+    if show_windows is True:
         cv2.namedWindow('Result', flags = cv2.WINDOW_NORMAL)
 
     #pre_frame = cv2.imread('mysample.jpg')
@@ -570,7 +570,7 @@ def phaseVideo6(input_path, output_path = None, display = False):
         if output_path != None:
             out.write(display)
 
-        if display:
+        if show_windows is True:
             cv2.imshow('Result', display)
             key = cv2.waitKey(1)
             if key & 0xFF == ord('q'):
@@ -591,7 +591,7 @@ def main():
     parser = argparse.ArgumentParser()
 
     # 是否将处理后结果显示。
-    parser.add_argument('-d', '--display', default = False, action = "store_true",
+    parser.add_argument('-s', '--show', default = False, action = "store_true",
                         help = '[Optional] If shows result to local view. ')   
 
     parser.add_argument('-i', '--input', type = str, default = 'test.mp4', 
@@ -608,7 +608,7 @@ def main():
         # detect_video(FLAGS.input,  
         phaseVideo6(input_path = FLAGS.input,  
                     output_path = FLAGS.output, 
-                    display = FLAGS.display)
+                    show_windows = FLAGS.display)
 
     else:
         print("See usage with --help.")
