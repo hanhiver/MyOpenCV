@@ -550,10 +550,11 @@ def phaseVideo6(input_path, output_path = None, show_windows = False):
             area = cv2.contourArea(item)
             if area > 300 and area < 50000:
                 contours_valid.append(item)
+                #print(contours_valid)
                 #print(area)
 
         #print('Frame: ', frame_index, ' Areas: ', len(contours_valid))
-        image_contours = cv2.drawContours(image_gray//2, contours_valid, -1, (255, 255, 255), -1)
+        image_contours = cv2.drawContours(image_gray//2, contours_valid, -1, 255, -1)
 
         image1 = np.hstack([image_gray, image_avg])
         image2 = np.hstack([thresh, image_contours])
