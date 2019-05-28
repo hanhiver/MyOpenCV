@@ -475,6 +475,9 @@ def phaseVideo6(input_path, output_path = None, show_windows = False):
 
     acum_frame = None
     ACUM_NUMBER = 100
+
+    acum_contours = None
+    acum_contours_base = None
     
     camera = cv2.VideoCapture(input_path)
     if camera is None:
@@ -517,6 +520,7 @@ def phaseVideo6(input_path, output_path = None, show_windows = False):
 
         acum_frame += image_gray
 
+        # For the first ACUM_NUMBER frames, we don't caculate the differential to avoid false alarm. 
         if frame_index < ACUM_NUMBER:
             continue
 
@@ -553,11 +557,24 @@ def phaseVideo6(input_path, output_path = None, show_windows = False):
                 #print(contours_valid)
                 #print(area)
 
+        if acum_contours is None: 
+            acum_contours = np.zeros(shape = image_gray.shape, dtype = np.int16)
+
+        frame_contours = cv2.drawContours(np.zeros(shape = image_gray.shape, dtype = np.int8), 
+                                          contours_valid, -1, 2, -1)
+        acum_contours += frame_contours
+        acum_contours -= 1
+        _, acum_contours = cv2.threshold(acum_contours, 0, 65535, cv2.THRESH_TOZERO)
+
         #print('Frame: ', frame_index, ' Areas: ', len(contours_valid))
         image_contours = cv2.drawContours(image_gray//2, contours_valid, -1, 255, -1)
 
+        image_acum = np.array(acum_contours, dtype = np.uint8)
+
+
         image1 = np.hstack([image_gray, image_avg])
-        image2 = np.hstack([thresh, image_contours])
+        #image2 = np.hstack([thresh, image_contours])
+        image2 = np.hstack([image_acum, image_contours])
         display = np.vstack([image1, image2])
         #display = cv2.cvtColor(display, cv2.COLOR_GRAY2RGB)
         #print('SIZE: ', display.shape)
