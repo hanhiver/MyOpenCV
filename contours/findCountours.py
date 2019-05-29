@@ -570,8 +570,9 @@ def phaseVideo6(input_path, output_path = None, show_windows = False):
         image_contours = cv2.drawContours(image_gray//2, contours_valid, -1, 255, -1)
 
         image_acum = image_contours.copy()
-        image_acum = cv2.threshold(image_acum, 252, 252, cv2.THRESH_TRUNC)
+        image_acum = cv2.threshold(image_acum, 248, 248, cv2.THRESH_TRUNC)
         image_acum = np.array(acum_contours, dtype = np.uint8)
+        print('MAX:', acum_contours.max(), ' - show - ', image_acum.max())
 
         image1 = np.hstack([image_gray, image_avg])
         #image2 = np.hstack([thresh, image_contours])
