@@ -702,9 +702,12 @@ def phaseVideo7(input_path, output_path = None, show_windows = False):
         
 
         image1 = np.hstack([fmf.frame_gray, fmf.get_standard_frame()])
+        print("IMAGE1:", image1.shape)
         #image2 = np.hstack([thresh, image_contours])
         image2 = np.hstack([fmf.frame_gray, fmf.get_contours_frame()])
+        print("IMAGE2:", image2.shape)
         display = np.vstack([image1, image2])
+        print(display.shape)
         #display = cv2.cvtColor(display, cv2.COLOR_GRAY2RGB)
         #print('SIZE: ', display.shape)
         #display = np.hstack([image_gray, image_avg, thresh])
