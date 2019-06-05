@@ -18,33 +18,31 @@ class FMFinding():
 		self.ACCUM_NUMBER = 100
 
 	def init_acum_frame(self):
-		self.acum_frame = np.zeros(shpae = (self.h, self.w), dtype = np.uint32)
+		self.acum_frame = np.zeros(shape = (self.h, self.w), dtype = np.uint32)
 
 	def init_acum_contours(self):
 		self.acum_contours = np.zeros(shape = (self.h, self.w), dtype = np.int16)
 
-	def addNewFrame(self, new_frame):
+	def add_new_frame(self, new_frame):
 		frame = cv2.resize(new_frame, (self.w, self.h), interpolation = cv2.INTER_LINEAR)
 		self.curr_frame = frame
 
-		frame_gray = cv2.cvtColor(frame, cv2.COLOR_RGB2GRAY)
-		self.frame_gray = frame_gray
-
+		self.frame_gray = cv2.cvtColor(frame, cv2.COLOR_RGB2GRAY)
+		
 		if self.acum_frame is None:
 			self.init_acum_frame()
 
-		self.acum_frame += image_gray
+		self.acum_frame += self.frame_gray
 		self.frame_index += 1
 
-		self.frame_avg = self.acum_frame // self.frame_index
+		self.frame_avg = np.array((self.acum_frame // self.frame_index), dtype = np.uint8)
 
-		if frame_index >= 30000:
-			acum_frame = acum_frame // 2
-			frame_index = frame_index // 2
+		if self.frame_index >= 30000:
+			self.acum_frame = self.acum_frame // 2
+			self.frame_index = self.frame_index // 2
 
-	def phaseFrame(self, new_frame):
-		self.addNewFrame(new_frame)
-
+	def phase_frame(self, new_frame):
+		#self.addNewFrame(new_frame)
 		frame_delta = cv2.absdiff(self.frame_avg, self.frame_gray)
 
 		thresh = cv2.threshold(frame_delta, 50, 255, cv2.THRESH_BINARY)[1]
@@ -77,6 +75,29 @@ class FMFinding():
 		_, self.acum_contours = cv2.threshold(self.acum_contours, 0, 65535, cv2.THRESH_TOZERO)
 
 		max_contours = self.acum_contours.max()
+
+		return max_contours
+
+	def get_frame_index(self):
+		return self.frame_index
+
+	# Return the accumulate frame which has no moving objects. 
+	def get_standard_frame(self):
+		return self.frame_avg
+
+	# Return a frame that mark the contours in current input frame. 
+	def get_contours_frame(self):
+		_, frame = cv2.threshold(self.acum_contours, 248, 248, cv2.THRESH_TRUNC)
+		frame = np.array(frame, dtype = np.uint8)
+		return frame 
+
+
+
+
+
+
+
+
 
 
 
