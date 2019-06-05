@@ -26,6 +26,7 @@ class FMFinding():
 	def add_new_frame(self, new_frame):
 		frame = cv2.resize(new_frame, (self.w, self.h), interpolation = cv2.INTER_LINEAR)
 		#self.curr_frame = frame
+		self.frame_gray = cv2.cvtColor(frame, cv2.COLOR_RGB2GRAY)
 		
 		if self.acum_frame is None:
 			self.init_acum_frame()
@@ -42,8 +43,8 @@ class FMFinding():
 	def phase_frame(self, new_frame):
 		#self.addNewFrame(new_frame)
 		frame = cv2.resize(new_frame, (self.w, self.h), interpolation = cv2.INTER_LINEAR)
-		self.frame_gray = cv2.cvtColor(frame, cv2.COLOR_RGB2GRAY)
-		frame_delta = cv2.absdiff(self.frame_avg, self.frame_gray)
+		frame = cv2.cvtColor(frame, cv2.COLOR_RGB2GRAY)
+		frame_delta = cv2.absdiff(self.frame_avg, frame)
 
 		thresh = cv2.threshold(frame_delta, 50, 255, cv2.THRESH_BINARY)[1]
 		thresh = cv2.dilate(thresh, None, iterations = 2)
