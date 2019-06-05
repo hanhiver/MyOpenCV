@@ -608,7 +608,7 @@ def phaseVideo7(input_path, output_path = None, show_windows = False):
 
     ACUM_NUMBER = 100
 
-    fmf = fmfinding.FMFinding(width = 1920, height = 1080 - 1080//5 - 1080//10)
+    fmf = fmfinding.FMFinding(width = 1920//2, height = (1080 - 1080//5 - 1080//10)//2)
 
     camera = cv2.VideoCapture(input_path)
     if camera is None:
@@ -702,10 +702,10 @@ def phaseVideo7(input_path, output_path = None, show_windows = False):
         
 
         image1 = np.hstack([fmf.frame_gray, fmf.get_standard_frame()])
-        print("IMAGE1:", image1.shape)
+        print("IMAGE1:", image1.shape, fmf.get_standard_frame().shape)
         #image2 = np.hstack([thresh, image_contours])
         image2 = np.hstack([fmf.frame_gray, fmf.get_contours_frame()])
-        print("IMAGE2:", image2.shape)
+        print("IMAGE2:", image2.shape, fmf.get_contours_frame().shape)
         display = np.vstack([image1, image2])
         print(display.shape)
         #display = cv2.cvtColor(display, cv2.COLOR_GRAY2RGB)
