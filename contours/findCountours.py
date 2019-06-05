@@ -606,7 +606,7 @@ def phaseVideo6(input_path, output_path = None, show_windows = False):
 def phaseVideo7(input_path, output_path = None, show_windows = False):
     import fmfinding
 
-    ACUM_NUMBER = 100
+    ACUM_NUMBER = 101
 
     fmf = fmfinding.FMFinding(width = 1920//2, height = (1080 - 1080//5 - 1080//10)//2)
 
