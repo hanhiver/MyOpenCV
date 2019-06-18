@@ -5,18 +5,24 @@ import time
 # Class to find the foreign matters in the highway. 
 class FMFinding():
 
-	def __init__(self, width = 960, height = 540, accu_number = 30000, fm_threshold = 50):
+	def __init__(self, width = 960, height = 540, 
+				 accu_number = 30000, 
+				 fm_threshold = 50, 
+				 min_area = 300, 
+				 max_area = 40000):
+		
 		self.frame_index = 0
 		self.w = width
 		self.h = height
 		self.accu_number = 30000 # 25 frames per second, default 20 minutes. 
 		self.fm_threshold = 50 # threshold of the foreign matters that diff with the background. 	
+		self.min_area = min_area # The min area of the fm in a frame. Default 30, 5.5*5.5 pixels.  
+		self.max_area = max_area # The max area of the fm in a frame. Default 40000, 200*200 pixels, 
 
 		#self.curr_frame = None
 		self.acum_frame = None
 		self.acum_contours = None
 		self.acum_contours_base = None
-
 
 
 	def init_acum_frame(self):
@@ -42,6 +48,9 @@ class FMFinding():
 			self.acum_frame = self.acum_frame // 2
 			self.frame_index = self.frame_index // 2
 
+	# Return the accumulate value of the foreign matter detection. 
+	# A fm will leave 1 accumulation value in one frame. Based on our test, 300 could be a practical threshold. 
+	# 300 means it stay at the same place more than 12 seconds (accumulatively). 
 	def phase_frame(self, new_frame):
 		#self.addNewFrame(new_frame)
 		frame = cv2.resize(new_frame, (self.w, self.h), interpolation = cv2.INTER_LINEAR)
@@ -79,7 +88,7 @@ class FMFinding():
 
 		max_contours = self.acum_contours.max()
 
-		return max_contours
+		return max_contours, contours_valid
 
 	def get_frame_index(self):
 		return self.frame_index
@@ -97,6 +106,8 @@ class FMFinding():
 		_, frame = cv2.threshold(self.acum_contours, 248, 248, cv2.THRESH_TRUNC)
 		frame = np.array(frame, dtype = np.uint8)
 		return frame 
+
+
 
 
 

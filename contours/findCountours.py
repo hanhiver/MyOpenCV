@@ -650,70 +650,12 @@ def phaseVideo7(input_path, output_path = None, show_windows = False):
         c_max = fmf.phase_frame(frame)
 
         print('C_MAX: ', c_max)
-        # image_avg = acum_frame//frame_index
-        # image_avg = np.array(image_avg, dtype = np.uint8)
-
-        # if frame_index >= 30000:
-        #     acum_frame = acum_frame // 2
-        #     frame_index = frame_index // 2
-        
-        # #blur_image = cv2.GaussianBlur(image_gray, (21, 21), 0)
-        # blur_image = image_gray
-
-        # image_delta = cv2.absdiff(image_avg, blur_image)
-        
-        # thresh = cv2.threshold(image_delta, 50, 255, cv2.THRESH_BINARY)[1]
-        # #thresh = cv2.adaptiveThreshold(image_delta, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 11, 2)
-        # thresh = cv2.dilate(thresh, None, iterations = 2)
-
-        # if cv2.__version__[0] == '3': 
-        #     _, contours, hierarchy = cv2.findContours(thresh.copy(), 
-        #                                    cv2.RETR_EXTERNAL, 
-        #                                    cv2.CHAIN_APPROX_SIMPLE)
-        # else:
-        #     contours, hierarchy = cv2.findContours(thresh.copy(), 
-        #                                    cv2.RETR_EXTERNAL, 
-        #                                    cv2.CHAIN_APPROX_SIMPLE)
-
-        # contours_valid = []
-        # for item in contours:
-        #     area = cv2.contourArea(item)
-        #     if area > 300 and area < 50000:
-        #         contours_valid.append(item)
-        #         #print(contours_valid)
-        #         #print(area)
-
-        # if acum_contours is None: 
-        #     acum_contours = np.zeros(shape = image_gray.shape, dtype = np.int16)
-
-        # frame_contours = cv2.drawContours(np.zeros(shape = image_gray.shape, dtype = np.int8), 
-        #                                   contours_valid, -1, 2, -1)
-        # acum_contours += frame_contours
-        # acum_contours -= 1
-        # _, acum_contours = cv2.threshold(acum_contours, 0, 65535, cv2.THRESH_TOZERO)
-
-        #print('Frame: ', frame_index, ' Areas: ', len(contours_valid))
-        #image_contours = cv2.drawContours(image_gray//2, contours_valid, -1, 255, -1)
-
-        #image_acum = acum_contours.copy()
-        #image_acum = cv2.threshold(image_acum, 248, 248, cv2.THRESH_TRUNC)
-        #image_acum = np.array(acum_contours, dtype = np.uint8)
-        #print('MAX:', acum_contours.max(), ' - show - ', image_acum.max())
-        
 
         image1 = np.hstack([fmf.frame_gray, fmf.get_standard_frame()])
         #image2 = np.hstack([thresh, image_contours])
         image2 = np.hstack([fmf.frame_gray, fmf.get_contours_frame()])
         display = np.vstack([image1, image2])
         print(display.shape)
-        #display = cv2.cvtColor(display, cv2.COLOR_GRAY2RGB)
-        #print('SIZE: ', display.shape)
-        #display = np.hstack([image_gray, image_avg, thresh])
-        #display = np.hstack([image_gray, image_contours])
-        #display = frame
-        
-        # Already set the sample image in the begining. 
-        #pre_frame = image_curr
 
         if output_path != None:
             out.write(display)
