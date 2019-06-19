@@ -10,10 +10,11 @@ import cv2 as cv
 import numpy as np 
 from pdf2image import convert_from_path
 
-img = convert_from_path('./test.pdf')
+img = convert_from_path('./test1.pdf')
 #img[0].save('test.png')
 
-page = np.asarray(img[0])
+img = np.asarray(img[0])
+page = cv.cvtColor(img, cv.COLOR_RGB2GRAY)
 page = cv.threshold(page, 210, 255, cv.THRESH_BINARY)[1]
 
 full = np.ones(shape = page.shape, dtype = np.uint8) * 255
@@ -21,7 +22,15 @@ page = full - page
 
 page = cv.dilate(page, None, iterations = 15)
 
-cv.imshow('PDF', page)
+contours, hierarchy = cv.findContours(page, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
+
+contour_img = cv.drawContours(img, contours, -1, 255, 3)
+
+result = contour_img
+
+cv.imwrite('test.png', result)
+
+cv.imshow('PDF', result)
 cv.waitKey()
 
 
