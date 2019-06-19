@@ -13,7 +13,7 @@ from pdf2image import convert_from_path
 img = convert_from_path('./test1.pdf')
 #img[0].save('test.png')
 
-img = np.asarray(img[0])
+img = np.asarray(img[1])
 page = cv.cvtColor(img, cv.COLOR_RGB2GRAY)
 page = cv.threshold(page, 210, 255, cv.THRESH_BINARY)[1]
 
