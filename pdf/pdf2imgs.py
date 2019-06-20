@@ -6,6 +6,8 @@ Created on Tue Jun 11 16:18:35 2019
 @author: dhan
 """
 import sys
+import os
+import argparse
 import PIL
 import cv2 as cv
 import numpy as np 
@@ -59,22 +61,30 @@ def cut_image(image, threshold = 210, char_distence = 15):
 	display = None
 
 	for item in contours:
-		image_zeros = np.zeros(shape = image_bin.shape, dtype = np.uint8)
-		image_mask = cv.drawContours(image_zeros, [item], -1, 1, -1)
 
-		res = ~ cv.copyTo(image_revers, image_mask)
+		#image_zeros = np.zeros(shape = image_bin.shape, dtype = np.uint8)
+		#image_mask = cv.drawContours(image_zeros, [item], -1, 1, -1)
+		
+		rect = cv.boundingRect(item)
+		(x, y, w, h) = rect 
+		#print("RECT: ", rect)
+		res = image_bin[y:y+h, x:x+w]
+
+		#res = ~ cv.copyTo(image_revers, image_mask)
 		res_images.append(res)
 
 	return res_images
 
-def main():
-	if len(sys.argv) < 2: 
-		print('Please input correct pdf file name. ')
-		return
+def phase_pdf(pdf_file):
 
-	pdf_images = pdf2img(sys.argv[1])
+	pdf_images = pdf2img(pdf_file)
 
-	output_file = sys.argv[1].split('.')[0] + '_page_' + '%03d' + '_sec_' + '%03d' + '.jpg'
+	filename = pdf_file.split('.')[0]
+
+	os.mkdir(filename)
+	os.chdir(filename)
+
+	output_file = 'page_' + '%03d' + '_sec_' + '%03d' + '.jpg'
 
 	page_index = 1
 	for page in pdf_images:
@@ -87,7 +97,24 @@ def main():
 		
 		page_index += 1
 
+	os.chdir('../')
+
 	print('Job Done! Total %d pages. '%(page_index - 1))
+
+def main():
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument('input', type = str, default = None, nargs = '+',
+                        help = 'Input files. ')
+
+    FLAGS = parser.parse_args()
+
+    if FLAGS.input:
+    	for item in FLAGS.input:
+        	phase_pdf(item)
+    else:
+        print("See usage with --help.")
+
 
 if __name__ == '__main__':
 	main()
