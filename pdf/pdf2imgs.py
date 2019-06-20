@@ -5,68 +5,81 @@ Created on Tue Jun 11 16:18:35 2019
 
 @author: dhan
 """
+import sys
 import PIL
 import cv2 as cv
 import numpy as np 
 import pdf2image 
 
-
+# Convert the pdf to images. 
+# pdf_file: path to the pdf file. 
+# return: images in opencv format, 1 page for 1 image. 
 def pdf2img(pdf_file):
 	images = pdf2image.convert_from_path(pdf_file)
-	return images
 
-def cut_image(image, threshold = 210, dilate_iteration = 20):
+	res_images = []
+
+	for image in images:
+		res = np.asarray(image)
+		res_images.append(res)
+
+	return res_images
+
+# Cut one image to different chars clusters. 
+# image: input image, opencv format. 
+# threshold: threshold to convert identify the chars in the image. Default value 210.  
+# char_distence: distences (pixels) between chars will be consider as one cluster. Default value 15. 
+def cut_image(image, threshold = 210, char_distence = 15):
 	# Convert image from RGB to Gray. 
-	image_gray = cv.cvtColor(page, cv.COLOR_RGB2GRAY)
+	image_gray = cv.cvtColor(image, cv.COLOR_RGB2GRAY)
 
 	# Using threshold to binaryzate the image. 
-	image_bin = (image_gray, threshold, 255, cv.THRESH_BINARY)[1]
+	image_bin = cv.threshold(image_gray, threshold, 255, cv.THRESH_BINARY)[1]
 
 	# Reverse the image for dilate cut. 
-	image_ones = np.ones(shape = image_bin.shape, dtype = np.uint8)
-	image_revers = image_ones * 255 - image_bin
+	image_revers = ~ image_bin
 
 	# Dilate the image to separate chars clusters. 
-	image_dilate = cv.dilate(page, None, iterations = dilate_iteration)
+	image_dilate = cv.dilate(image_revers, None, iterations = char_distence)
 
 	# Find chars clusters. 
 	contours, hierarchy = cv.findContours(image_dilate, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
 
 	res_images = []
 
+	display = None
+
 	for item in contours:
 		image_zeros = np.zeros(shape = image_bin.shape, dtype = np.uint8)
-		image_contour = cv.drawContours(image_zeros, [item], -1, 1, -1)
-		res = image_contour * image_bin 
+		image_mask = cv.drawContours(image_zeros, [item], -1, 1, -1)
+
+		res = ~ cv.copyTo(image_revers, image_mask)
 		res_images.append(res)
 
 	return res_images
 
+def main():
+	if len(sys.argv) < 2: 
+		print('Please input correct pdf file name. ')
+		return
 
+	pdf_images = pdf2img(sys.argv[1])
 
+	output_file = sys.argv[1].split('.')[0] + '_page_' + '%03d' + '_sec_' + '%03d' + '.jpg'
 
-img = convert_from_path('./test1.pdf')
-#img[0].save('test.png')
+	page_index = 1
+	for page in pdf_images:
+		res_images = cut_image(page)
 
+		sec_index = 1
+		for image in res_images:
+			cv.imwrite(output_file%(page_index, sec_index), image)
+			sec_index += 1
+		
+		page_index += 1
 
-img = np.asarray(img[0])
-page = cv.cvtColor(img, cv.COLOR_RGB2GRAY)
-page = cv.threshold(page, 210, 255, cv.THRESH_BINARY)[1]
+	print('Job Done! Total %d pages. '%(page_index - 1))
 
-full = np.ones(shape = page.shape, dtype = np.uint8) * 255
-page = full - page 
-
-page = cv.dilate(page, None, iterations = 20)
-
-contours, hierarchy = cv.findContours(page, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
-
-contour_img = cv.drawContours(img, contours, -1, 255, 3)
-
-result = contour_img
-
-cv.imwrite('test.png', result)
-
-cv.imshow('PDF', result)
-cv.waitKey()
-
+if __name__ == '__main__':
+	main()
 
