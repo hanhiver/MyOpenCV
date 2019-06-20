@@ -31,7 +31,7 @@ def pdf2img(pdf_file):
 # image: input image, opencv format. 
 # threshold: threshold to convert identify the chars in the image. Default value 210.  
 # char_distence: distences (pixels) between chars will be consider as one cluster. Default value 15. 
-def cut_image(image, threshold = 210, char_distence = 15):
+def cut_image(image, threshold = 210, char_distence = 18):
 	# Convert image from RGB to Gray. 
 	image_gray = cv.cvtColor(image, cv.COLOR_RGB2GRAY)
 
@@ -42,7 +42,8 @@ def cut_image(image, threshold = 210, char_distence = 15):
 	image_revers = ~ image_bin
 
 	# Dilate the image to separate chars clusters. 
-	image_dilate = cv.dilate(image_revers, None, iterations = char_distence)
+	image_erode = cv.erode(image_revers, None, iterations = 1)
+	image_dilate = cv.dilate(image_erode, None, iterations = char_distence)
 
 	# Find chars clusters. 
 	#contours, hierarchy = cv.findContours(image_dilate, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
