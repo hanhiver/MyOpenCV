@@ -43,7 +43,16 @@ def cut_image(image, threshold = 210, char_distence = 15):
 	image_dilate = cv.dilate(image_revers, None, iterations = char_distence)
 
 	# Find chars clusters. 
-	contours, hierarchy = cv.findContours(image_dilate, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
+	#contours, hierarchy = cv.findContours(image_dilate, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE)
+
+	if cv.__version__[0] == '3':
+		_, contours, hierarchy = cv.findContours(image_dilate, 
+												 cv.RETR_EXTERNAL, 
+												 cv.CHAIN_APPROX_SIMPLE)
+	elif cv.__version__[0] == '4':
+		contours, hierarchy = cv.findContours(image_dilate, 
+											  cv.RETR_EXTERNAL, 
+											  cv.CHAIN_APPROX_SIMPLE)
 
 	res_images = []
 
