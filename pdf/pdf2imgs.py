@@ -31,7 +31,7 @@ def pdf2img(pdf_file):
 # image: input image, opencv format. 
 # threshold: threshold to convert identify the chars in the image. Default value 210.  
 # char_distence: distences (pixels) between chars will be consider as one cluster. Default value 15. 
-def cut_image(image, threshold = 210, char_distence = 18):
+def cut_image(image, threshold = 210, char_distence = 15):
 	# Convert image from RGB to Gray. 
 	image_gray = cv.cvtColor(image, cv.COLOR_RGB2GRAY)
 
@@ -69,7 +69,7 @@ def cut_image(image, threshold = 210, char_distence = 18):
 		rect = cv.boundingRect(item)
 		(x, y, w, h) = rect 
 		#print("RECT: ", rect)
-		res = image_bin[y:y+h, x:x+w]
+		res = image[y:y+h, x:x+w]
 
 		#res = ~ cv.copyTo(image_revers, image_mask)
 		res_images.append(res)
