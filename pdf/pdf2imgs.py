@@ -59,8 +59,6 @@ def cut_image(image, threshold = 210, char_distence = 15):
 
 	res_images = []
 
-	display = None
-
 	for item in contours:
 
 		#image_zeros = np.zeros(shape = image_bin.shape, dtype = np.uint8)
@@ -80,7 +78,7 @@ def phase_pdf(pdf_file):
 
 	pdf_images = pdf2img(pdf_file)
 
-	filename = pdf_file.split('.')[0]
+	filename = pdf_file.split('/')[-1].split('.')[0]
 
 	os.mkdir(filename)
 	os.chdir(filename)
