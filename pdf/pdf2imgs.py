@@ -13,6 +13,18 @@ import cv2 as cv
 import numpy as np 
 import pdf2image 
 
+info_list = [
+   #['page', 'x', 'y', '_内容_']
+	[1, 253, 421, '供应商地址'], 
+	[1, 620, 142, '采购订单'],
+	[2, 292, 532, '购货方'], 
+	[2, 1107, 531, '供应商'],
+	[3, 1130, 288, '收货方'],  
+	[4, 504, 313, '附注'],
+	[4, 504, 252, '供应商配置ID'], 
+	[4, 1362, 1169, '总价'], 
+]
+
 # Convert the pdf to images. 
 # pdf_file: path to the pdf file. 
 # return: images in opencv format, 1 page for 1 image. 
@@ -87,7 +99,21 @@ def cut_image(image, threshold = 210, char_distence = 15, padding = 30):
 
 	return res_rects, res_images
 
-def phase_pdf(pdf_file):
+def write_images(page, rects, images, info_list, biases = 10):
+	if len(rects) != len(images):
+		return
+
+	for i in range(len(rects)):
+		(x, y, w, h) = rects[i]
+		for item in info_list:
+			print("TEST: ", item[0], page+1, abs(item[1] - x) < biases, abs(item[2] - y) < biases)
+			if item[0] == page+1 and abs(item[1] - x) < biases and abs(item[2] - y) < biases:
+				filename = item[3] + '.jpg'
+				cv.imwrite(filename, images[i])
+
+	return
+
+def phase_pdf_raw(pdf_file):
 
 	pdf_images = pdf2img(pdf_file)
 
@@ -116,7 +142,24 @@ def phase_pdf(pdf_file):
 
 	os.chdir('../')
 
-	print('Job Done! Total %d pages. '%(page_index - 1))
+	print('Job Done! Total %d pages. '%(len(pdf_images) - 1))
+
+def phase_pdf(pdf_file):
+
+	pdf_images = pdf2img(pdf_file)
+
+	filename = pdf_file.split('/')[-1].split('.')[0]
+
+	os.mkdir(filename)
+	os.chdir(filename)
+
+	for page in range(len(pdf_images)):
+		(res_rects, res_images) = cut_image(pdf_images[page])
+		write_images(page, res_rects, res_images, info_list)
+
+	os.chdir('../')
+
+	print('Job Done! Total %d pages. '%(len(pdf_images) - 1))
 
 def main():
     parser = argparse.ArgumentParser()
