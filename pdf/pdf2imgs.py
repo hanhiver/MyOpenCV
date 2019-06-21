@@ -31,7 +31,11 @@ def pdf2img(pdf_file):
 # image: input image, opencv format. 
 # threshold: threshold to convert identify the chars in the image. Default value 210.  
 # char_distence: distences (pixels) between chars will be consider as one cluster. Default value 15. 
-def cut_image(image, threshold = 210, char_distence = 15):
+# padding: padding each block image with padding pixels in both width and length.
+# return: 
+#       1. rect: (x, y, w, h) of each block. 
+#       2. res_images: list of the block images.  
+def cut_image(image, threshold = 210, char_distence = 15, padding = 30):
 	# Convert image from RGB to Gray. 
 	image_gray = cv.cvtColor(image, cv.COLOR_RGB2GRAY)
 
@@ -57,6 +61,7 @@ def cut_image(image, threshold = 210, char_distence = 15):
 											  cv.RETR_EXTERNAL, 
 											  cv.CHAIN_APPROX_SIMPLE)
 
+	res_rects = []
 	res_images = []
 
 	for item in contours:
@@ -66,13 +71,21 @@ def cut_image(image, threshold = 210, char_distence = 15):
 		
 		rect = cv.boundingRect(item)
 		(x, y, w, h) = rect 
-		#print("RECT: ", rect)
-		res = image[y:y+h, x:x+w]
+		
+		# init a return block with blank padding. 
+		res = np.full((h + padding*2, w + padding*2, 3), 255, dtype = np.uint8)
+		
+		# cut a block from the original image. 
+		block = image[y:y+h, x:x+w]
+
+		# fill the block to the center of the return result. 
+		res[padding:padding+h, padding:padding+w] = block
 
 		#res = ~ cv.copyTo(image_revers, image_mask)
+		res_rects.append(rect)
 		res_images.append(res)
 
-	return res_images
+	return res_rects, res_images
 
 def phase_pdf(pdf_file):
 
@@ -83,15 +96,20 @@ def phase_pdf(pdf_file):
 	os.mkdir(filename)
 	os.chdir(filename)
 
-	output_file = 'page_' + '%03d' + '_sec_' + '%03d' + '.jpg'
+	output_file = 'page_' + '%03d' + '_sec_' + '%03d' + '_POS_%d_%d'+ '.jpg'
 
 	page_index = 1
 	for page in pdf_images:
-		res_images = cut_image(page)
+		(res_rects, res_images) = cut_image(page)
 
 		sec_index = 1
 		for image in res_images:
-			cv.imwrite(output_file%(page_index, sec_index), image)
+			cv.imwrite(output_file%(page_index, 
+									sec_index, 
+									res_rects[sec_index-1][0], 
+									res_rects[sec_index-1][1]), 
+				       image)
+			
 			sec_index += 1
 		
 		page_index += 1
