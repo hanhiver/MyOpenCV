@@ -8,6 +8,7 @@ Created on Tue Jun 11 16:18:35 2019
 import sys
 import os
 import argparse
+import shutil
 import PIL
 import cv2 as cv
 import numpy as np 
@@ -106,7 +107,7 @@ def write_images(page, rects, images, info_list, biases = 10):
 	for i in range(len(rects)):
 		(x, y, w, h) = rects[i]
 		for item in info_list:
-			print("TEST: ", item[0], page+1, abs(item[1] - x) < biases, abs(item[2] - y) < biases)
+			#print("TEST: ", item[0], page+1, abs(item[1] - x) < biases, abs(item[2] - y) < biases)
 			if item[0] == page+1 and abs(item[1] - x) < biases and abs(item[2] - y) < biases:
 				filename = item[3] + '.jpg'
 				cv.imwrite(filename, images[i])
@@ -118,6 +119,9 @@ def phase_pdf_raw(pdf_file):
 	pdf_images = pdf2img(pdf_file)
 
 	filename = pdf_file.split('/')[-1].split('.')[0]
+
+	if os.path.exists(filename):
+		shutil.rmtree(filename)
 
 	os.mkdir(filename)
 	os.chdir(filename)
