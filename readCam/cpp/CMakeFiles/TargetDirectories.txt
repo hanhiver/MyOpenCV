@@ -1,3 +1,0 @@
-/home/dhan/myprog/python/MyOpenCV/readCam/CMakeFiles/rebuild_cache.dir
-/home/dhan/myprog/python/MyOpenCV/readCam/CMakeFiles/readCam_cpp.dir
-/home/dhan/myprog/python/MyOpenCV/readCam/CMakeFiles/edit_cache.dir

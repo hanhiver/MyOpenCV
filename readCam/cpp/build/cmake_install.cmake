@@ -1,4 +1,4 @@
-# Install script for directory: /home/dhan/myprog/python/MyOpenCV/readCam
+# Install script for directory: /home/grace/myprog/python/MyOpenCV/readCam/cpp
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/dhan/myprog/python/MyOpenCV/readCam/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/grace/myprog/python/MyOpenCV/readCam/cpp/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

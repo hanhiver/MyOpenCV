@@ -12,8 +12,8 @@ clock_t  start, end;
 int main()
 {
 	start = clock();
-	VideoCapture cap("./1s.mp4");
-	//VideoCapture cap(0);
+	//VideoCapture cap("./1s.mp4");
+	VideoCapture cap(2);
 
 	if (!cap.isOpened())
 	{

@@ -6,7 +6,8 @@ import argparse
 def wsVideoPhase(input):
     time_stamp = time.time()
 
-    vid = cv2.VideoCapture(input[0])
+    #vid = cv2.VideoCapture(input[0])
+    vid = cv2.VideoCapture(2)
 
     if not vid.isOpened():
         raise IOError("Couldn't open webcam or video: {}".format(input))

@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/dhan/myprog/python/MyOpenCV/readCam
+CMAKE_SOURCE_DIR = /home/grace/myprog/python/MyOpenCV/readCam/cpp
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/dhan/myprog/python/MyOpenCV/readCam
+CMAKE_BINARY_DIR = /home/grace/myprog/python/MyOpenCV/readCam/cpp/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/dhan/myprog/python/MyOpenCV/readCam/CMakeFiles /home/dhan/myprog/python/MyOpenCV/readCam/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/grace/myprog/python/MyOpenCV/readCam/cpp/build/CMakeFiles /home/grace/myprog/python/MyOpenCV/readCam/cpp/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/dhan/myprog/python/MyOpenCV/readCam/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/grace/myprog/python/MyOpenCV/readCam/cpp/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
