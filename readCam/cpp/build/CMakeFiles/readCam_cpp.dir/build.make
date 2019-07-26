@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/grace/myprog/python/MyOpenCV/readCam/cpp
+CMAKE_SOURCE_DIR = /home/dhan/myprog/python/MyOpenCV/readCam/cpp
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/grace/myprog/python/MyOpenCV/readCam/cpp/build
+CMAKE_BINARY_DIR = /home/dhan/myprog/python/MyOpenCV/readCam/cpp/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/readCam_cpp.dir/depend.make
@@ -59,16 +59,16 @@ include CMakeFiles/readCam_cpp.dir/flags.make
 
 CMakeFiles/readCam_cpp.dir/readCam_cpp.cpp.o: CMakeFiles/readCam_cpp.dir/flags.make
 CMakeFiles/readCam_cpp.dir/readCam_cpp.cpp.o: ../readCam_cpp.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/grace/myprog/python/MyOpenCV/readCam/cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/readCam_cpp.dir/readCam_cpp.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/readCam_cpp.dir/readCam_cpp.cpp.o -c /home/grace/myprog/python/MyOpenCV/readCam/cpp/readCam_cpp.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/dhan/myprog/python/MyOpenCV/readCam/cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/readCam_cpp.dir/readCam_cpp.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/readCam_cpp.dir/readCam_cpp.cpp.o -c /home/dhan/myprog/python/MyOpenCV/readCam/cpp/readCam_cpp.cpp
 
 CMakeFiles/readCam_cpp.dir/readCam_cpp.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/readCam_cpp.dir/readCam_cpp.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/grace/myprog/python/MyOpenCV/readCam/cpp/readCam_cpp.cpp > CMakeFiles/readCam_cpp.dir/readCam_cpp.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/dhan/myprog/python/MyOpenCV/readCam/cpp/readCam_cpp.cpp > CMakeFiles/readCam_cpp.dir/readCam_cpp.cpp.i
 
 CMakeFiles/readCam_cpp.dir/readCam_cpp.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/readCam_cpp.dir/readCam_cpp.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/grace/myprog/python/MyOpenCV/readCam/cpp/readCam_cpp.cpp -o CMakeFiles/readCam_cpp.dir/readCam_cpp.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/dhan/myprog/python/MyOpenCV/readCam/cpp/readCam_cpp.cpp -o CMakeFiles/readCam_cpp.dir/readCam_cpp.cpp.s
 
 CMakeFiles/readCam_cpp.dir/readCam_cpp.cpp.o.requires:
 
@@ -90,23 +90,49 @@ readCam_cpp_EXTERNAL_OBJECTS =
 
 readCam_cpp: CMakeFiles/readCam_cpp.dir/readCam_cpp.cpp.o
 readCam_cpp: CMakeFiles/readCam_cpp.dir/build.make
-readCam_cpp: /usr/local/opencv4/lib/libopencv_dnn.so.4.0.1
-readCam_cpp: /usr/local/opencv4/lib/libopencv_gapi.so.4.0.1
-readCam_cpp: /usr/local/opencv4/lib/libopencv_ml.so.4.0.1
-readCam_cpp: /usr/local/opencv4/lib/libopencv_objdetect.so.4.0.1
-readCam_cpp: /usr/local/opencv4/lib/libopencv_photo.so.4.0.1
-readCam_cpp: /usr/local/opencv4/lib/libopencv_stitching.so.4.0.1
-readCam_cpp: /usr/local/opencv4/lib/libopencv_video.so.4.0.1
-readCam_cpp: /usr/local/opencv4/lib/libopencv_calib3d.so.4.0.1
-readCam_cpp: /usr/local/opencv4/lib/libopencv_features2d.so.4.0.1
-readCam_cpp: /usr/local/opencv4/lib/libopencv_flann.so.4.0.1
-readCam_cpp: /usr/local/opencv4/lib/libopencv_highgui.so.4.0.1
-readCam_cpp: /usr/local/opencv4/lib/libopencv_videoio.so.4.0.1
-readCam_cpp: /usr/local/opencv4/lib/libopencv_imgcodecs.so.4.0.1
-readCam_cpp: /usr/local/opencv4/lib/libopencv_imgproc.so.4.0.1
-readCam_cpp: /usr/local/opencv4/lib/libopencv_core.so.4.0.1
+readCam_cpp: /usr/lib/x86_64-linux-gnu/libopencv_shape.so.3.2.0
+readCam_cpp: /usr/lib/x86_64-linux-gnu/libopencv_stitching.so.3.2.0
+readCam_cpp: /usr/lib/x86_64-linux-gnu/libopencv_superres.so.3.2.0
+readCam_cpp: /usr/lib/x86_64-linux-gnu/libopencv_videostab.so.3.2.0
+readCam_cpp: /usr/lib/x86_64-linux-gnu/libopencv_aruco.so.3.2.0
+readCam_cpp: /usr/lib/x86_64-linux-gnu/libopencv_bgsegm.so.3.2.0
+readCam_cpp: /usr/lib/x86_64-linux-gnu/libopencv_bioinspired.so.3.2.0
+readCam_cpp: /usr/lib/x86_64-linux-gnu/libopencv_ccalib.so.3.2.0
+readCam_cpp: /usr/lib/x86_64-linux-gnu/libopencv_datasets.so.3.2.0
+readCam_cpp: /usr/lib/x86_64-linux-gnu/libopencv_dpm.so.3.2.0
+readCam_cpp: /usr/lib/x86_64-linux-gnu/libopencv_face.so.3.2.0
+readCam_cpp: /usr/lib/x86_64-linux-gnu/libopencv_freetype.so.3.2.0
+readCam_cpp: /usr/lib/x86_64-linux-gnu/libopencv_fuzzy.so.3.2.0
+readCam_cpp: /usr/lib/x86_64-linux-gnu/libopencv_hdf.so.3.2.0
+readCam_cpp: /usr/lib/x86_64-linux-gnu/libopencv_line_descriptor.so.3.2.0
+readCam_cpp: /usr/lib/x86_64-linux-gnu/libopencv_optflow.so.3.2.0
+readCam_cpp: /usr/lib/x86_64-linux-gnu/libopencv_plot.so.3.2.0
+readCam_cpp: /usr/lib/x86_64-linux-gnu/libopencv_reg.so.3.2.0
+readCam_cpp: /usr/lib/x86_64-linux-gnu/libopencv_saliency.so.3.2.0
+readCam_cpp: /usr/lib/x86_64-linux-gnu/libopencv_stereo.so.3.2.0
+readCam_cpp: /usr/lib/x86_64-linux-gnu/libopencv_structured_light.so.3.2.0
+readCam_cpp: /usr/lib/x86_64-linux-gnu/libopencv_surface_matching.so.3.2.0
+readCam_cpp: /usr/lib/x86_64-linux-gnu/libopencv_text.so.3.2.0
+readCam_cpp: /usr/lib/x86_64-linux-gnu/libopencv_ximgproc.so.3.2.0
+readCam_cpp: /usr/lib/x86_64-linux-gnu/libopencv_xobjdetect.so.3.2.0
+readCam_cpp: /usr/lib/x86_64-linux-gnu/libopencv_xphoto.so.3.2.0
+readCam_cpp: /usr/lib/x86_64-linux-gnu/libopencv_video.so.3.2.0
+readCam_cpp: /usr/lib/x86_64-linux-gnu/libopencv_viz.so.3.2.0
+readCam_cpp: /usr/lib/x86_64-linux-gnu/libopencv_phase_unwrapping.so.3.2.0
+readCam_cpp: /usr/lib/x86_64-linux-gnu/libopencv_rgbd.so.3.2.0
+readCam_cpp: /usr/lib/x86_64-linux-gnu/libopencv_calib3d.so.3.2.0
+readCam_cpp: /usr/lib/x86_64-linux-gnu/libopencv_features2d.so.3.2.0
+readCam_cpp: /usr/lib/x86_64-linux-gnu/libopencv_flann.so.3.2.0
+readCam_cpp: /usr/lib/x86_64-linux-gnu/libopencv_objdetect.so.3.2.0
+readCam_cpp: /usr/lib/x86_64-linux-gnu/libopencv_ml.so.3.2.0
+readCam_cpp: /usr/lib/x86_64-linux-gnu/libopencv_highgui.so.3.2.0
+readCam_cpp: /usr/lib/x86_64-linux-gnu/libopencv_photo.so.3.2.0
+readCam_cpp: /usr/lib/x86_64-linux-gnu/libopencv_videoio.so.3.2.0
+readCam_cpp: /usr/lib/x86_64-linux-gnu/libopencv_imgcodecs.so.3.2.0
+readCam_cpp: /usr/lib/x86_64-linux-gnu/libopencv_imgproc.so.3.2.0
+readCam_cpp: /usr/lib/x86_64-linux-gnu/libopencv_core.so.3.2.0
 readCam_cpp: CMakeFiles/readCam_cpp.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/grace/myprog/python/MyOpenCV/readCam/cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable readCam_cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/dhan/myprog/python/MyOpenCV/readCam/cpp/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable readCam_cpp"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/readCam_cpp.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -123,6 +149,6 @@ CMakeFiles/readCam_cpp.dir/clean:
 .PHONY : CMakeFiles/readCam_cpp.dir/clean
 
 CMakeFiles/readCam_cpp.dir/depend:
-	cd /home/grace/myprog/python/MyOpenCV/readCam/cpp/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/grace/myprog/python/MyOpenCV/readCam/cpp /home/grace/myprog/python/MyOpenCV/readCam/cpp /home/grace/myprog/python/MyOpenCV/readCam/cpp/build /home/grace/myprog/python/MyOpenCV/readCam/cpp/build /home/grace/myprog/python/MyOpenCV/readCam/cpp/build/CMakeFiles/readCam_cpp.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/dhan/myprog/python/MyOpenCV/readCam/cpp/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/dhan/myprog/python/MyOpenCV/readCam/cpp /home/dhan/myprog/python/MyOpenCV/readCam/cpp /home/dhan/myprog/python/MyOpenCV/readCam/cpp/build /home/dhan/myprog/python/MyOpenCV/readCam/cpp/build /home/dhan/myprog/python/MyOpenCV/readCam/cpp/build/CMakeFiles/readCam_cpp.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/readCam_cpp.dir/depend
 

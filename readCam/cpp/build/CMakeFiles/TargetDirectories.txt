@@ -1,3 +1,3 @@
-/home/grace/myprog/python/MyOpenCV/readCam/cpp/build/CMakeFiles/rebuild_cache.dir
-/home/grace/myprog/python/MyOpenCV/readCam/cpp/build/CMakeFiles/readCam_cpp.dir
-/home/grace/myprog/python/MyOpenCV/readCam/cpp/build/CMakeFiles/edit_cache.dir
+/home/dhan/myprog/python/MyOpenCV/readCam/cpp/build/CMakeFiles/rebuild_cache.dir
+/home/dhan/myprog/python/MyOpenCV/readCam/cpp/build/CMakeFiles/readCam_cpp.dir
+/home/dhan/myprog/python/MyOpenCV/readCam/cpp/build/CMakeFiles/edit_cache.dir

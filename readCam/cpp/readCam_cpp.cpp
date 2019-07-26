@@ -13,7 +13,7 @@ int main()
 {
 	start = clock();
 	//VideoCapture cap("./1s.mp4");
-	VideoCapture cap(2);
+	VideoCapture cap(0);
 
 	if (!cap.isOpened())
 	{
