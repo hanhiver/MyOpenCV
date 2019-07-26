@@ -1,19 +1,23 @@
 import numpy as np 
-import cv2 
+import cv2 as cv
 import time
 import argparse
 
 def wsVideoPhase(input):
     time_stamp = time.time()
 
-    #vid = cv2.VideoCapture(input[0])
-    vid = cv2.VideoCapture(2)
+    #vid = cv.VideoCapture(input[0])
+    vid = cv.VideoCapture(0)
 
     if not vid.isOpened():
         raise IOError("Couldn't open webcam or video: {}".format(input))
+    
+    vid.set(cv.CAP_PROP_FRAME_WIDTH, 800)
+    vid.set(cv.CAP_PROP_FRAME_HEIGHT, 600)
+    print(vid.get(cv.CAP_PROP_FPS))
 
-    cv2.namedWindow("result")
-    cv2.resizeWindow("result", 800, 400)
+    cv.namedWindow("result")
+    #cv.resizeWindow("result", 800, 400)
 
     time_cur = time.time()
     print('\t[{:3.3f} ms]: 初始化完成. '.format((time_cur - time_stamp)*1000));
@@ -28,8 +32,8 @@ def wsVideoPhase(input):
 
         if type(frame) != type(None):
             
-            cv2.imshow("result", frame)
-            if cv2.waitKey(1) & 0xFF == ord('q'):
+            cv.imshow("result", frame)
+            if cv.waitKey(1) & 0xFF == ord('q'):
                 return False
 
             time_cur = time.time()
@@ -39,7 +43,7 @@ def wsVideoPhase(input):
         else:
             break             
 
-    cv2.destroyAllWindows()
+    cv.destroyAllWindows()
 
 
 def main():
