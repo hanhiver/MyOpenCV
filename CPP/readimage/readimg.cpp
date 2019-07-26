@@ -6,6 +6,14 @@ using namespace cv;
 #include <iostream>
 using namespace std;
 
+void readimage()
+{
+    Mat image;
+
+    image = imread("./lena.jpg", 0);
+
+}
+
 int main(int argc, char *argv[])
 {
     Mat image; 
