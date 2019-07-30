@@ -64,7 +64,7 @@ def main(input_file):
 
     sched_run = SchedRun(func = show_frame, args = {frame_queue}, 
                          init_func = init_show_windows, 
-                         interval = 0.035, 
+                         interval = 0.135, 
                          init_interval = 0.5)
 
     vid = cv2.VideoCapture(input_file)
