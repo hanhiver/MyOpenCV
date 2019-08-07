@@ -1,4 +1,4 @@
-APPS=speedTest
+APPS=speedTest fileSpeed
 ARGS=$(shell pkg-config --cflags --libs opencv)
 
 all: $(APPS)
