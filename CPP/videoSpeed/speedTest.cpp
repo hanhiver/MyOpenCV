@@ -2,7 +2,8 @@
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <time.h>
- 
+#include <iostream> 
+
 using namespace cv;
 using namespace std;
  
