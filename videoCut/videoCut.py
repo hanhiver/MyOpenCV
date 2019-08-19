@@ -45,10 +45,12 @@ def wsVideoPhase(input, local_view = True):
         # ===========================
         #frame = imgRotate(frame, -10)
         (h, w) = frame.shape[:2]
-        frame = frame[6*h//10:7*h//10, 4*w//9:5*w//8]
+        frame = frame[2*h//5:h, 0:w]
         #frame = frame[2*h//7:12*h//35, 0:w]
         #frame = frame[2*h//7:12*h//35, 123*w//280:177*w//280]
         # ===========================
+        (h, w) = frame.shape[:2]
+        print('Frame: {} * {}'.format(w, h))
 
         frame = cv2.resize(frame, RESOLUTION, interpolation = cv2.INTER_LINEAR)
 
