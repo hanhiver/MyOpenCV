@@ -7,6 +7,23 @@ import argparse
 
 
 """
+旋转图像，给定angle，旋转图像。
+"""
+def imgRotate(image, angle):
+    # Get the dimention of the image and then determine the certer.
+    (h, w) = image.shape[:2]
+    (cX, cY) = (w // 2, h // 2)
+
+    # Get the rotation matrix.
+    M = cv2.getRotationMatrix2D(center = (cX, cY), angle = angle, scale = 1.0)
+
+    # Perform the actrual rotation and return the image.
+    res = cv2.warpAffine(image, M, (w, h))
+
+    return res
+
+
+"""
 输入视频文件，处理视频文件。
 input: 输入的视频文件名称。
 	   如果是数字，则是打开第n+1号系统摄像头。
@@ -43,8 +60,9 @@ def wsVideoPhase(input, local_view = True):
         
         # 根据图像特殊处理
         # ===========================
-        #frame = imgRotate(frame, -10)
+        frame = imgRotate(frame, 8)
         (h, w) = frame.shape[:2]
+
         frame = frame[2*h//5:h, 0:w]
         #frame = frame[2*h//7:12*h//35, 0:w]
         #frame = frame[2*h//7:12*h//35, 123*w//280:177*w//280]
